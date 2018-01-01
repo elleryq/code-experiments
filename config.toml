@@ -1,4 +1,9 @@
 baseURL = "https://elleryq.github.io/code-experiments/"
 languageCode = "zh-tw"
 title = "Code experiments"
-theme = "code-editor"
+theme = "ananke"
+DefaultContentLanguage = "zh"
+enableRobotsTXT = true
+
+[params]
+  twitter = "https://twitter.com/elleryq"

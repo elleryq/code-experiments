@@ -1,9 +1,7 @@
 ---
-layout: post
-title: 'Python list comprehension / map / multiprocess pool.map 比較'
-date: 2013-10-16 08:40
-comments: true
-categories: 
+title: "Python list comprehension / map / multiprocess pool.map 比較"
+date: 2013-10-16T08:40:00+08:00
+draft: false
 ---
 ```
 # 使用 for

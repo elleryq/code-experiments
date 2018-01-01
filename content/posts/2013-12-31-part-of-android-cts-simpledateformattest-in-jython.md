@@ -1,9 +1,7 @@
 ---
-layout: post
-title: 'Part of Android CTS SimpleDateFormatTest in Jython'
-date: 2013-12-31 08:12
-comments: true
-categories: 
+title: "Part of Android CTS SimpleDateFormatTest in Jython"
+date: 2013-12-31T08:12:00+08:00
+draft: false
 ---
 同事問我為什麼會測試不過，就想說用 jython 試試看 PC 上的行為。
 SimpleDateFormat("EEEE", Locale.ENGLISH).parseDate("Tuesday") 會得到 Tue Jan 06 00:00:00 CST 1970 ，用 UTC calendar 去取星期幾時，會得到 2 - Monday，而測試預期是得到 3 - Tuesday。

@@ -1,9 +1,7 @@
 ---
-layout: post
-title: 'Python imp'
-date: 2013-10-30 03:43
-comments: true
-categories: 
+title: "Python imp"
+date: 2013-10-30T03:43:00+08:00
+draft: false
 ---
 蠻好奇 Python 怎麼實現 Plugin，在 Stackflow 上找到 [Building a minimal plugin architecture in Python - Stack Overflow](http://stackoverflow.com/questions/932069/building-a-minimal-plugin-architecture-in-python "Building a minimal plugin architecture in Python - Stack Overflow") ，得知可以使用 imp 模組。
 PyMOTW 有 imp 的範例：[imp – Interface to module import mechanism. - Python Module of the Week](http://pymotw.com/2/imp/ "imp – Interface to module import mechanism.")

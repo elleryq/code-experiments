@@ -1,9 +1,7 @@
 ---
-layout: post
-title: 'Python NodeTransformer'
-date: 2013-10-23 02:44
-comments: true
-categories: 
+title: "Python NodeTransformer"
+date: 2013-10-23T02:44:00+08:00
+draft: false
 ---
 透過 ast.NodeTransformer 可以動態的把程式裡的字串換掉，利用 compile() 再執行。
 主要的說明就放在程式裡。

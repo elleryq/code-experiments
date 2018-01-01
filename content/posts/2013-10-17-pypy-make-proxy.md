@@ -1,9 +1,7 @@
 ---
-layout: post
 title: 'Pypy make_proxy'
-date: 2013-10-17 19:51
-comments: true
-categories: 
+date: 2013-10-17T19:51:00+08:00
+draft: false
 ---
 在 [What PyPy can do for your objects — PyPy 2.1.0 documentation](http://pypy.readthedocs.org/en/latest/objspace-proxies.html "What PyPy can do for your objects — PyPy 2.1.0 documentation") 看到 make_proxy 的範例：
 ```

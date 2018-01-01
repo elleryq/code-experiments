@@ -1,9 +1,7 @@
 ---
-layout: post
-title: 'Python URL 組合與分拆'
-date: 2013-10-29 03:40
-comments: true
-categories: 
+title: "Python URL 組合與分拆"
+date: 2013-10-29T03:40:00+08:00
+draft: false
 ---
 Python 2 裡是用 urlparse
 
