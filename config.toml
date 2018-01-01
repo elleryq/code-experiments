@@ -1,0 +1,4 @@
+baseURL = "https://elleryq.github.io/code-experiments/"
+languageCode = "zh-tw"
+title = "Code experiments"
+theme = "code-editor"
