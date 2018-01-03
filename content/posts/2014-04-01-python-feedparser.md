@@ -1,9 +1,7 @@
 ---
-layout: post
 title: 'Python feedparser'
-date: 2014-04-01 02:59
-comments: true
-categories: 
+date: 2014-04-01T02:59:00+08:00
+draft: false
 ---
 feedparser 是一個可以用來解析 RSS/ATOM feed 的模組，是目前最常見也最常用的模組。用 pip search 時，有發現相似的模組 speedparser，號稱比 feedparser 更快，有機會再來試用看看。
 

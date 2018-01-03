@@ -1,9 +1,7 @@
 ---
-layout: post
 title: 'C# about dynamic ExpandoObject'
-date: 2014-07-22 09:24
-comments: true
-categories: 
+date: 2014-07-22T09:24:00+08:00
+categories: [c#]
 ---
 讀了 metaprogramming in .net 第一章，才知道 4.0 以後的 dynamic 很強大。
 

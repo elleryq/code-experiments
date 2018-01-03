@@ -1,9 +1,7 @@
 ---
-layout: post
 title: 'Python URL 組合之二'
-date: 2014-05-15 03:07
-comments: true
-categories: 
+date: 2014-05-15T03:07:00+08:00
+draft: false
 ---
 urlparse.urlparse 解析後的結果，如果有想要變動的話，可以再用 urlparse.urlunparse 組回去，下面是一個從網址把 Google analytics 參數移除的例子。
 

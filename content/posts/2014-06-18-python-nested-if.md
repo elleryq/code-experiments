@@ -1,9 +1,9 @@
 ---
-layout: post
 title: 'Python nested if'
-date: 2014-06-18 02:21
-comments: true
+date: 2014-06-18T02:21:00+08:00
+draft: false
 categories: [Python]
+tags: [python]
 ---
 之前在 checkio 網站有看過人家這樣寫：
 ```

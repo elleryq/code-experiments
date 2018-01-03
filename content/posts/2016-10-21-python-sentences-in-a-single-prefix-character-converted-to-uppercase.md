@@ -1,8 +1,7 @@
 ---
-layout: post
 title: 'Python - 將句子中的單字首字轉換成大寫'
-date: 2016-10-21 01:20
-comments: true
+date: 2016-10-21T01:20:00+08:00
+draft: false
 categories: [python]
 ---
 在網路上看到，就順便試試看。來源：[Let's Start From Here: [JS/ES6] 將句子中的單字首字轉換成大寫-不用正規表示法](https://zerotowhole.blogspot.tw/2016/10/jses6_20.html "Let's Start From Here: [JS/ES6] 將句子中的單字首字轉換成大寫-不用正規表示法")

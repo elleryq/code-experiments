@@ -1,9 +1,8 @@
 ---
-layout: post
 title: 'bluebird Promise'
-date: 2015-05-12 10:29
-comments: true
-categories: 
+date: 2015-05-12T10:29:00+08:00
+draft: false
+categories: [javascript]
 ---
 sequelize 的 Promise 是用 bluebird 這個 package 實作的，就拿來練習。
 

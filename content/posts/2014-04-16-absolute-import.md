@@ -1,9 +1,7 @@
 ---
-layout: post
 title: 'Python absolute_import'
-date: 2014-04-16 03:52
-comments: true
-categories: 
+date: 2014-04-16T03:52:00+08:00
+draft: false
 ---
 在網路上看到 from \_\_future\_\_ import absolute_import ，不懂什麼意思，就研究一下，看是怎麼一回事。
 主要定義在 PEP 328 http://legacy.python.org/dev/peps/pep-0328/

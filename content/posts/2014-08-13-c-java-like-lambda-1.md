@@ -1,9 +1,9 @@
 ---
 layout: post
 title: 'C# 練習：仿 Java Lambda'
-date: 2014-08-13 03:03
-comments: true
-categories: 
+date: 2014-08-13T03:03:00+08:00
+draft: false
+categories: [c#]
 ---
 C# 從一開始仿 Java，到後來，語法上的發展已經超越 Java，所以現在反而是 Java 仿 C# 與其他語言。最近的 Java 8 在講的 Lambda ，早在 C# 2.0 時，就已經有了雛型，到了 C# 3.0 則已經發展成熟。
 

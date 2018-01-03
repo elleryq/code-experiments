@@ -1,8 +1,7 @@
 ---
-layout: post
 title: 'Python try-except-else-finally'
-date: 2016-07-05 09:24
-comments: true
+date: 2016-07-05T09:24:00+08:00
+draft: false
 categories: [python]
 ---
 Python 的 try-except-finally 裡有 else 子句，這相當有意思。

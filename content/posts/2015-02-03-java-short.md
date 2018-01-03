@@ -1,9 +1,8 @@
 ---
-layout: post
 title: 'Java Short'
-date: 2015-02-03 03:24
-comments: true
-categories: 
+date: 2015-02-03T03:24:00+08:00
+draft: false
+categories: [java]
 ---
 沒想到簡單的 i + 1
 ```

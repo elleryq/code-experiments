@@ -1,9 +1,8 @@
 ---
-layout: post
 title: 'C# 使用 CodeDomProvider 編譯程式'
-date: 2014-07-18 03:14
-comments: true
-categories: 
+date: 2014-07-18T03:14:00+08:00
+draft: false
+categories: [c#]
 ---
 也是從 metaprogramming in .net 看來的，一樣是在 ubuntu 12.04 上用 dmcs /t:exe intantiatingCodeProviders.cs 編譯，執行沒問題。書裡說會有找不到 csc.exe 的情況，但至少在 Ubuntu 上是沒看到。
 

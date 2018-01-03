@@ -1,9 +1,8 @@
 ---
-layout: post
 title: 'Python - UTC 日期轉 local 日期'
-date: 2016-11-03 08:25
-comments: true
-categories: 
+date: 2016-11-03T08:25:00+08:00
+draft: false
+categories: [python]
 ---
 用 dateutil 做解析日期字串，然後用 arrow 做轉換，很方便。
 

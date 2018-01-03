@@ -1,8 +1,7 @@
 ---
-layout: post
 title: 'Python hasattr'
-date: 2016-07-20 02:36
-comments: true
+date: 2016-07-20T02:36:00+08:00
+draft: false
 categories: [python]
 ---
 今天看到這篇文章：[一个危险的Python函数，不推荐使用| 编程派 | Coding Python](http://codingpy.com/article/hasattr-a-dangerous-misnomer/ "一个危险的Python函数，不推荐使用")

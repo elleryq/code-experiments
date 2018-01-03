@@ -1,9 +1,8 @@
 ---
-layout: post
 title: 'Python Class variable'
-date: 2014-11-19 10:19
-comments: true
-categories: 
+date: 2014-11-19T10:19:00+08:00
+draft: false
+categories: [python]
 ---
 標題下的不好，因為不知道該怎麼說。類別裡宣告變數以後，之後方法裡，會怎麼去認定，為了搞清楚這點，就寫了小程式。
 

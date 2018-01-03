@@ -1,9 +1,8 @@
 ---
-layout: post
 title: 'C# about dynamic ExpandoObject member function'
-date: 2014-07-22 09:48
-comments: true
-categories: 
+date: 2014-07-22T09:48:00+08:00
+draft: false
+categories: [c#]
 ---
 由於 ExpandoObject 自身的能力，增加屬性非常簡單。但如果要增加一個 member function，該怎麼做？這可以透過 Func 或 Action 來達成。
 

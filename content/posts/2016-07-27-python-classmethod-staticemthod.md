@@ -1,9 +1,8 @@
 ---
-layout: post
 title: 'Python classmethod/staticemthod'
-date: 2016-07-27 10:41
-comments: true
-categories: 
+date: 2016-07-27T10:41:00+08:00
+draft: false
+categories: [python]
 ---
 知道但是不太熟，特別來試試看。
 classmethod 跟 staticmethod 很相似，classmethod 有帶一個 cls ，就是 class 本身，staticmethod 比較像是 c++/java 裡的 static。

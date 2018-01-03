@@ -1,9 +1,9 @@
 ---
-layout: post
 title: 'Python decorator'
-date: 2014-07-01 01:38
-comments: true
-categories: 
+date: 2014-07-01T01:38:00+08:00
+draft: false
+categories: [python]
+tags: [python]
 ---
 真的還是要自己試著憑空弄過一次才會比較清楚。
 

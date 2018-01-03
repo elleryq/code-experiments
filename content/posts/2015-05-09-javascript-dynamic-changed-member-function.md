@@ -1,8 +1,7 @@
 ---
-layout: post
 title: 'Javascript 動態改變 member function'
-date: 2015-05-09 14:59
-comments: true
+date: 2015-05-09T14:59:00+08:00
+draft: false
 categories: [javascript]
 ---
 純粹因為懶得 fork 出來改，所以想說看能不能動態改變，算是 monkey patch 這樣。

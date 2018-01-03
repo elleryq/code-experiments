@@ -1,9 +1,8 @@
 ---
-layout: post
 title: 'Javascript setTimeout'
-date: 2014-07-01 06:49
-comments: true
-categories: 
+date: 2014-07-01T06:49:00+08:00
+draft: false
+categories: [javascript]
 ---
 每次用每次都要查一下，這次要記下來。
 有寫在 jsfiddle.net 那邊，網址是 http://jsfiddle.net/LaPFQ/

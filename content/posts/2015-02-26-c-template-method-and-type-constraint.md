@@ -1,9 +1,8 @@
 ---
-layout: post
 title: 'C# template method and type constraint'
-date: 2015-02-26 08:34
-comments: true
-categories: 
+date: 2015-02-26T08:34:00+08:00
+draft: false
+categories: [c#]
 ---
 在 linqpad 裡試著，記得先選為 c# program，再貼 code
 

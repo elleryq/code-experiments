@@ -1,9 +1,7 @@
 ---
-layout: post
 title: 'Java constructor'
-date: 2014-01-08 09:59
-comments: true
-categories: 
+date: 2014-01-08T09:59:00+08:00
+draft: false
 ---
 純粹是驗證，雖然已經知道結果，還是動手確認一下。
 

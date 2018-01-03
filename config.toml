@@ -5,5 +5,10 @@ theme = "ananke"
 DefaultContentLanguage = "zh"
 enableRobotsTXT = true
 
+[taxonomies]
+   tag = "tags"
+   category = "categories"
+
 [params]
   twitter = "https://twitter.com/elleryq"
+  recent_posts_number = 5

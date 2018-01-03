@@ -1,9 +1,7 @@
 ---
-layout: post
 title: 'Python3 "\u860b\u679c" 轉為 Unicode 字串'
-date: 2014-05-08 08:19
-comments: true
-categories: 
+date: 2014-05-08T08:19:00+08:00
+draft: false
 ---
 這是在 fb 上看到人家問的問題，可是後來好像貼的人又移除貼文了。
 

@@ -1,9 +1,8 @@
 ---
-layout: post
 title: 'Extract partial keys/attributes from dict/object'
-date: 2016-07-15 09:25
-comments: true
-categories: 
+date: 2016-07-15T09:25:00+08:00
+draft: false
+categories: [python]
 ---
 利用 dictionary comprehension 很輕易的就可以辦到這件事情。
 參考自：http://stackoverflow.com/questions/5352546/best-way-to-extract-subset-of-key-value-pairs-from-python-dictionary-object

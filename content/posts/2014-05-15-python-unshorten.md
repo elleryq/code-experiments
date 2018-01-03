@@ -1,9 +1,7 @@
 ---
-layout: post
 title: 'Python unshorten'
-date: 2014-05-15 03:13
-comments: true
-categories: 
+date: 2014-05-15T03:13:00+08:00
+draft: false
 ---
 在 Stackoverflow 上找到這兩篇：
  * [curl - How can I un-shorten a URL using python? - Stack Overflow](https://stackoverflow.com/questions/7153096/how-can-i-un-shorten-a-url-using-python "curl - How can I un-shorten a URL using python? - Stack Overflow")
