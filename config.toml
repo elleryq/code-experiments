@@ -4,6 +4,7 @@ title = "Code experiments"
 theme = "ananke"
 DefaultContentLanguage = "zh"
 enableRobotsTXT = true
+publishDir = "docs"
 
 [taxonomies]
    tag = "tags"
