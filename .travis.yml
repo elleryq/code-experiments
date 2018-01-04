@@ -12,7 +12,7 @@ script:
 
 deploy:
   local_dir: docs # Default static site output dir for Hugo
-  target_branch: master # GitHub pages branch to deploy to (in other cases it can be gh-pages)
+  target_branch: gh-pages
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN # This is the authentication which you will setup in the next step in travis-ci dashboard
