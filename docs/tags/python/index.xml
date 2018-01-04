@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Code experiments</title>
+    <link>https://elleryq.github.io/code-experiments/tags/python/</link>
+    <description>Recent content in Python on Code experiments</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Tue, 01 Jul 2014 01:38:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://elleryq.github.io/code-experiments/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python decorator</title>
+      <link>https://elleryq.github.io/code-experiments/posts/2014-07-01-python-decorator/</link>
+      <pubDate>Tue, 01 Jul 2014 01:38:00 +0800</pubDate>
+      
+      <guid>https://elleryq.github.io/code-experiments/posts/2014-07-01-python-decorator/</guid>
+      <description>真的還是要自己試著憑空弄過一次才會比較清楚。
+一般沒帶參數的 decorator，就是兩層。第一層負責接原來的函式，第二層的函式就是要傳回去的。有帶參數的 decorator，就是三層，第一層負責接參數，第二層負責接函式，第三層的函式是要傳回去的。
+那如果有上多個 decorator 時，最裡層的會先被執行，接著才是外層的。
+也可以用類別來寫，用類別寫就是要利用 __call__，之後再來試試看。
+# -*- coding: utf-8 -*- from __future__ import print_function, unicode_literals def wrapper(f): def inside_func(*args, **kwargs): print(&amp;quot;&amp;gt; wrapper&amp;quot;) f(*args, **kwargs) print(&amp;quot;&amp;lt; wrapper&amp;quot;) return inside_func def before(s): def new_func(f): def inside_func(*args, **kwargs): print(s) f(*args, **kwargs) return inside_func return new_func def after(s): def new_func(f): def inside_func(*args, **kwargs): f(*args, **kwargs) print(s) return inside_func return new_func def repeat(n): def new_func(f): def inside_func(s): for i in range(n): f(s) return inside_func return new_func @wrapper def foo(s): print(s) @repeat(5) def foo1(s): print(s) @after(&amp;quot;&amp;lt;&amp;lt;&amp;lt;&amp;quot;) # then here @before(&amp;quot;&amp;gt;&amp;gt;&amp;gt;&amp;quot;) # run first def foo2(s): print(s) foo(&amp;quot;Hello&amp;quot;) # 前後會加上 &#39;&amp;gt; wrapper&#39; 與 &#39;&amp;lt; wrapper&#39; foo1(&amp;quot;World&amp;quot;) # 這會印五次 World，因為 repeat(5) foo2(&amp;quot;Hello world&amp;quot;) # 先印出 &#39;&amp;gt;&amp;gt;&amp;gt;&#39; ，執行原函式，再印出 &#39;&amp;lt;&amp;lt;&amp;lt;&#39;  輸出結果</description>
+    </item>
+    
+    <item>
+      <title>Python nested if</title>
+      <link>https://elleryq.github.io/code-experiments/posts/2014-06-18-python-nested-if/</link>
+      <pubDate>Wed, 18 Jun 2014 02:21:00 +0800</pubDate>
+      
+      <guid>https://elleryq.github.io/code-experiments/posts/2014-06-18-python-nested-if/</guid>
+      <description>之前在 checkio 網站有看過人家這樣寫：
+def checkio(x, y): result = (x&amp;gt;10, y&amp;lt;10) conditions = { (True, True): 1, (True, False): 2, (False, True): 3, (False, False): 4 } return conditions(x, y)  真的有醍醐灌頂之感，原來 tuple 也可以拿來當作 dict 的 key。
+不過今天不是說這個，昨天天寫出這種 code，覺得超級醜：
+s = &amp;quot;Hello&amp;quot; pos = s.find(&#39;a&#39;) if pos == -1: pos = s.find(&#39;b&#39;) if pos == -1: pos = s.find(&#39;c&#39;) if pos == -1: return  今天就在想要怎麼寫會比較好，原本想說：
+pos = s.find(&#39;a&#39;) or s.find(&#39;b&#39;) or s.</description>
+    </item>
+    
+  </channel>
+</rss>
