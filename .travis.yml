@@ -7,7 +7,7 @@ install:
   - go get github.com/spf13/hugo # This provides the latest version of Hugo to Travis CI
 
 script:
-  - cd themes && git clone https://github.com/budparr/gohugo-theme-ananke.git ananke && cd ..
+  - cd themes && git clone https://github.com/elleryq/gohugo-theme-ananke.git ananke && cd ..
   - hugo # This commands builds your website on travis
 
 deploy:
