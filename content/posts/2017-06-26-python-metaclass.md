@@ -2,7 +2,8 @@
 title: 'Python - metaclass'
 date: 2017-06-26T09:12:00+08:00
 draft: false
-categories: [python]
+categories: ['python']
+tags: ['python']
 ---
 好奇 Django 的 Meta 怎麼做的，上網找了資料，並且參考 Django 的原始
 碼。
