@@ -4,7 +4,9 @@ go:
   - master # This uses automatically the latest version of go
 
 install:
-  - go get github.com/gohugoio/hugo # This provides the latest version of Hugo to Travis CI
+  - wget https://github.com/gohugoio/hugo/releases/download/v0.55.6/hugo_0.55.6_Linux-64bit.deb
+  - sudo dpkg -i hugo_0.55.6_Linux-64bit.deb
+  - hugo version
 
 script:
   - cd themes && git clone https://github.com/elleryq/gohugo-theme-ananke.git ananke && cd ..
