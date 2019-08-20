@@ -1,6 +1,6 @@
 ---
 title: "Python asyncio"
-date: 2019-08-20T17:00:00+08:00
+date: 2019-08-20T15:00:00+08:00
 draft: false
 ---
 看 Linux Journal 時看到的，順便練一下。這篇只是前導，還沒到 asyncio 的新語法。不過後續文章可能不會繼續在 Linux journal 上刊登了，因為 Linux journal 公告停刊了。
