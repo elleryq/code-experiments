@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>javascript on Code experiments</title>
+    <link>https://elleryq.github.io/code-experiments/categories/javascript/</link>
+    <description>Recent content in javascript on Code experiments</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Tue, 12 May 2015 10:29:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://elleryq.github.io/code-experiments/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>bluebird Promise</title>
+      <link>https://elleryq.github.io/code-experiments/posts/2015-05-12-bluebird-promise/</link>
+      <pubDate>Tue, 12 May 2015 10:29:00 +0800</pubDate>
+      
+      <guid>https://elleryq.github.io/code-experiments/posts/2015-05-12-bluebird-promise/</guid>
+      <description>sequelize 的 Promise 是用 bluebird 這個 package 實作的，就拿來練習。
+var bluebird = require(&#39;bluebird&#39;); var Promise = bluebird.Promise; function async(url) { console.log(&amp;quot;async&amp;quot;); return new Promise(function(resolve, reject) { // 這邊簡單做，url 是 undefine 時，就呼叫 reject；否則就呼叫 resolve() // resolve() 就是走 then() 那路，reject() 就是走 catch() 那路。 if(url) { resolve(url); } else { reject(&amp;quot;url is empty&amp;quot;); } }); } async(&amp;quot;http://localhost&amp;quot;).then(function(url) { console.log(&amp;quot;then &amp;quot; + url); return &amp;quot;new url&amp;quot;; }).then(function(url) { // 2nd then() will get 1st then() returned value.</description>
+    </item>
+    
+    <item>
+      <title>Javascript 動態改變 member function</title>
+      <link>https://elleryq.github.io/code-experiments/posts/2015-05-09-javascript-dynamic-changed-member-function/</link>
+      <pubDate>Sat, 09 May 2015 14:59:00 +0800</pubDate>
+      
+      <guid>https://elleryq.github.io/code-experiments/posts/2015-05-09-javascript-dynamic-changed-member-function/</guid>
+      <description>純粹因為懶得 fork 出來改，所以想說看能不能動態改變，算是 monkey patch 這樣。 實驗的結果是可以，畢竟這是動態語言應該要具有的能力。
+&amp;quot;use strict&amp;quot;; var User = function() { this.className = &amp;quot;User&amp;quot;; }; User.prototype.findByUsername = function(username, cb) { // 原來的函式 console.log(&amp;quot;findByUsername&amp;quot;); }; User.prototype.toString = function() { return this.className; } function attachToUser(UserSchema) { // 在這裡動態進行更換 UserSchema.prototype.oldFindByUsername = UserSchema.prototype.findByUsername; UserSchema.prototype.findByUsername = function(username, cb) { console.log(&amp;quot;new findByUsername&amp;quot;); }; } attachToUser(User); var obj = new User(); obj.findByUsername(&amp;quot;admin&amp;quot;, function() {}); obj.oldFindByUsername(&amp;quot;root&amp;quot;, function() {}); console.log(obj.toString());  執行結果：
+new findByUsername findByUsername User  </description>
+    </item>
+    
+    <item>
+      <title>Javascript setTimeout</title>
+      <link>https://elleryq.github.io/code-experiments/posts/2014-07-01-javascript-settimeout/</link>
+      <pubDate>Tue, 01 Jul 2014 06:49:00 +0800</pubDate>
+      
+      <guid>https://elleryq.github.io/code-experiments/posts/2014-07-01-javascript-settimeout/</guid>
+      <description>每次用每次都要查一下，這次要記下來。 有寫在 jsfiddle.net 那邊，網址是 http://jsfiddle.net/LaPFQ/ 應該是要再包成類別之類的會比較好，不過暫時就這樣吧。
+HTML
+&amp;lt;div id=&amp;quot;log&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;  Javascript
+var limit = 10; var count = 0; var trigger = function() { $(&amp;quot;#log&amp;quot;).append(&amp;quot;triggered &amp;quot; + count + &amp;quot;&amp;lt;br/&amp;gt;&amp;quot;); count++; if(count&amp;lt;=limit) { setTimeout(trigger, 2000); // $(&amp;quot;#log&amp;quot;).append(&amp;quot;scheduled&amp;lt;br/&amp;gt;&amp;quot;); } }; $(&amp;quot;#log&amp;quot;).append(&amp;quot;started&amp;lt;br/&amp;gt;&amp;quot;); var timeout = setTimeout(trigger, 2000);  </description>
+    </item>
+    
+  </channel>
+</rss>

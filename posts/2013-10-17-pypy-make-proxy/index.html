@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Code experiments  | Pypy make_proxy</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.55.6" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    <link href='https://elleryq.github.io/code-experiments/dist/main.css' rel='stylesheet' type="text/css" />
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Pypy make_proxy" />
+<meta property="og:description" content="在 What PyPy can do for your objects — PyPy 2.1.0 documentation 看到 make_proxy 的範例：
+from tputil import make_proxy history = [] def recorder(operation): history.append(operation) return operation.delegate() &gt;&gt;&gt;&gt; l = make_proxy(recorder, obj=[]) &gt;&gt;&gt;&gt; type(l) list &gt;&gt;&gt;&gt; l.append(3) &gt;&gt;&gt;&gt; len(l) 1 &gt;&gt;&gt;&gt; len(history) 2  但實際卻會發生：
+Traceback (most recent call last): File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt; File &quot;/usr/lib/pypy/lib_pypy/tputil.py&quot;, line 29, in make_proxy tp = tproxy(type, perform) TypeError: &#39;list&#39; object could not be wrapped  參考 pypy 對 make_proxy 的測試，增加類別 A，並修改為" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://elleryq.github.io/code-experiments/posts/2013-10-17-pypy-make-proxy/" />
+<meta property="article:published_time" content="2013-10-17T19:51:00&#43;08:00"/>
+<meta property="article:modified_time" content="2013-10-17T19:51:00&#43;08:00"/>
+
+<meta itemprop="name" content="Pypy make_proxy">
+<meta itemprop="description" content="在 What PyPy can do for your objects — PyPy 2.1.0 documentation 看到 make_proxy 的範例：
+from tputil import make_proxy history = [] def recorder(operation): history.append(operation) return operation.delegate() &gt;&gt;&gt;&gt; l = make_proxy(recorder, obj=[]) &gt;&gt;&gt;&gt; type(l) list &gt;&gt;&gt;&gt; l.append(3) &gt;&gt;&gt;&gt; len(l) 1 &gt;&gt;&gt;&gt; len(history) 2  但實際卻會發生：
+Traceback (most recent call last): File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt; File &quot;/usr/lib/pypy/lib_pypy/tputil.py&quot;, line 29, in make_proxy tp = tproxy(type, perform) TypeError: &#39;list&#39; object could not be wrapped  參考 pypy 對 make_proxy 的測試，增加類別 A，並修改為">
+
+
+<meta itemprop="datePublished" content="2013-10-17T19:51:00&#43;08:00" />
+<meta itemprop="dateModified" content="2013-10-17T19:51:00&#43;08:00" />
+<meta itemprop="wordCount" content="124">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pypy make_proxy"/>
+<meta name="twitter:description" content="在 What PyPy can do for your objects — PyPy 2.1.0 documentation 看到 make_proxy 的範例：
+from tputil import make_proxy history = [] def recorder(operation): history.append(operation) return operation.delegate() &gt;&gt;&gt;&gt; l = make_proxy(recorder, obj=[]) &gt;&gt;&gt;&gt; type(l) list &gt;&gt;&gt;&gt; l.append(3) &gt;&gt;&gt;&gt; len(l) 1 &gt;&gt;&gt;&gt; len(history) 2  但實際卻會發生：
+Traceback (most recent call last): File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt; File &quot;/usr/lib/pypy/lib_pypy/tputil.py&quot;, line 29, in make_proxy tp = tproxy(type, perform) TypeError: &#39;list&#39; object could not be wrapped  參考 pypy 對 make_proxy 的測試，增加類別 A，並修改為"/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://elleryq.github.io/code-experiments/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Code experiments
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+  <a href="https://twitter.com/elleryq" class="link-transition twitter link dib z-999 pt3 pt0-l mr2" title="Twitter link">
+    <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+  </a>
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+    <main class="pb7" role="main">
+      
+  <div class="flex-l mt2 mw8 center">
+    <article class="center cf pv5 ph3 ph4-ns mw7">
+      <header>
+        <p class="f6 b helvetica tracked">
+          POSTS
+        </p>
+        <h1 class="f1">
+          Pypy make_proxy
+        </h1>
+      </header>
+      <div class="nested-copy-line-height lh-copy f4 nested-links nested-img mid-gray">
+        <p>在 <a href="http://pypy.readthedocs.org/en/latest/objspace-proxies.html" title="What PyPy can do for your objects — PyPy 2.1.0 documentation">What PyPy can do for your objects — PyPy 2.1.0 documentation</a> 看到 make_proxy 的範例：</p>
+
+<pre><code>from tputil import make_proxy
+
+history = []
+def recorder(operation):
+    history.append(operation)
+    return operation.delegate()
+
+&gt;&gt;&gt;&gt; l = make_proxy(recorder, obj=[])
+&gt;&gt;&gt;&gt; type(l)
+list
+&gt;&gt;&gt;&gt; l.append(3)
+&gt;&gt;&gt;&gt; len(l)
+1
+&gt;&gt;&gt;&gt; len(history)
+2
+</code></pre>
+
+<p>但實際卻會發生：</p>
+
+<pre><code>Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;/usr/lib/pypy/lib_pypy/tputil.py&quot;, line 29, in make_proxy
+    tp = tproxy(type, perform)
+TypeError: 'list' object could not be wrapped
+</code></pre>
+
+<p>參考 pypy 對 make_proxy 的測試，增加類別 A，並修改為</p>
+
+<pre><code>from tputil import make_proxy
+
+class A(object):
+  def append(self, item):
+    pass
+
+history = []
+def recorder(operation):
+    history.append(operation)
+    return operation.delegate()
+
+&gt;&gt;&gt;&gt; l = make_proxy(recorder, obj=[])
+&gt;&gt;&gt;&gt; type(l)
+&lt;class '__main__.A'&gt;
+&gt;&gt;&gt;&gt; l.append(3)
+&gt;&gt;&gt;&gt; len(history)
+1
+&gt;&gt;&gt;&gt; print history
+[&lt;ProxyOperation A.__getattribute__(&lt;0x7f8f15887b50&gt;, 'append')&gt;]
+</code></pre>
+
+<p>這樣就可以了。make_proxy 是製造出一個代理物件，並且所有的操作都會呼叫 recorder 函式，範例裡，是呼叫 recorder 函式，把所有動作都紀錄到 history 裡。</p>
+
+      </div>
+    </article>
+    <aside class="ph3 mt2 mt6-ns">
+      
+
+
+
+
+
+
+
+  <div class="bg-light-gray pa3">
+    <ul>
+      <li class="list b mb3">
+        44 More Posts
+      </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2020-01-08-git-patch-rename/" class="link ph2 pv2 db black">
+            Will patch rename the filename?
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2019-08-20-python-asyncio/" class="link ph2 pv2 db black">
+            Python asyncio
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2019-05-28-property-inheritence/" class="link ph2 pv2 db black">
+            Python property 能不能繼承
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2017-06-26-python-metaclass/" class="link ph2 pv2 db black">
+            Python - metaclass
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2016-11-03-python-utc-date-go-local-date/" class="link ph2 pv2 db black">
+            Python - UTC 日期轉 local 日期
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2016-10-21-python-sentences-in-a-single-prefix-character-converted-to-uppercase/" class="link ph2 pv2 db black">
+            Python - 將句子中的單字首字轉換成大寫
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2016-07-27-python-classmethod-staticemthod/" class="link ph2 pv2 db black">
+            Python classmethod/staticemthod
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2016-07-20-python-hasattr/" class="link ph2 pv2 db black">
+            Python hasattr
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2016-07-15-extract-partial-keys-attributes-from-dict-object/" class="link ph2 pv2 db black">
+            Extract partial keys/attributes from dict/object
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2016-07-05-python-try-except-else-finally/" class="link ph2 pv2 db black">
+            Python try-except-else-finally
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2015-05-12-bluebird-promise/" class="link ph2 pv2 db black">
+            bluebird Promise
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2015-05-09-javascript-dynamic-changed-member-function/" class="link ph2 pv2 db black">
+            Javascript 動態改變 member function
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2015-02-26-c-template-method-and-type-constraint/" class="link ph2 pv2 db black">
+            C# template method and type constraint
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2015-02-03-java-short/" class="link ph2 pv2 db black">
+            Java Short
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-11-19-python-class-variable/" class="link ph2 pv2 db black">
+            Python Class variable
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-09-03-c-lazy/" class="link ph2 pv2 db black">
+            C# Lazy
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-08-13-c-java-like-lambda-1/" class="link ph2 pv2 db black">
+            C# 練習：仿 Java Lambda
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-07-22-c-about-dynamic-expandoobject-member-function/" class="link ph2 pv2 db black">
+            C# about dynamic ExpandoObject member function
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-07-22-c-about-dynamic/" class="link ph2 pv2 db black">
+            C# about dynamic ExpandoObject
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-07-18-c-using-the-codedomprovider-compiler/" class="link ph2 pv2 db black">
+            C# 使用 CodeDomProvider 編譯程式
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-07-18-c-codedom/" class="link ph2 pv2 db black">
+            C# CodeDom Provider
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-07-01-c-currying/" class="link ph2 pv2 db black">
+            C# currying
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-07-01-javascript-settimeout/" class="link ph2 pv2 db black">
+            Javascript setTimeout
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-07-01-python-decorator/" class="link ph2 pv2 db black">
+            Python decorator
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-06-18-python-nested-if/" class="link ph2 pv2 db black">
+            Python nested if
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-05-15-python-unshorten/" class="link ph2 pv2 db black">
+            Python unshorten
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-05-15-python-url-combo-ii/" class="link ph2 pv2 db black">
+            Python URL 組合之二
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-05-08-python3-u860bu679c-into-a-unicode-string/" class="link ph2 pv2 db black">
+            Python3 &#34;\u860b\u679c&#34; 轉為 Unicode 字串
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-04-16-absolute-import/" class="link ph2 pv2 db black">
+            Python absolute_import
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-04-01-python-feedparser/" class="link ph2 pv2 db black">
+            Python feedparser
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-03-14-python-multiple-inheritance/" class="link ph2 pv2 db black">
+            Python 多重繼承
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2014-01-08-java-constructor/" class="link ph2 pv2 db black">
+            Java constructor
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-12-31-part-of-android-cts-simpledateformattest-in-jython/" class="link ph2 pv2 db black">
+            Part of Android CTS SimpleDateFormatTest in Jython
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-10-30-python-imp/" class="link ph2 pv2 db black">
+            Python imp
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-10-29-python-url-combination-and-splitting/" class="link ph2 pv2 db black">
+            Python URL 組合與分拆
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-10-23-python-ast-1/" class="link ph2 pv2 db black">
+            Python ast (1)
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-10-23-python-nodetransformer/" class="link ph2 pv2 db black">
+            Python NodeTransformer
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-10-17-pypy-make-proxy/" class="link ph2 pv2 db black o-50">
+            Pypy make_proxy
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-10-16-python-list-comprehension-map-multiprocess-poolmap/" class="link ph2 pv2 db black">
+            Python list comprehension / map / multiprocess pool.map 比較
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-10-16-python-function-annotation/" class="link ph2 pv2 db black">
+            Python function annotation
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-10-15-classic-asp-security-project/" class="link ph2 pv2 db black">
+            Classic ASP Security Project
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-10-14-vbscript-include-import/" class="link ph2 pv2 db black">
+            VBScript include/import
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-10-14-vbscript-isnumeric-is-not-what-you-think/" class="link ph2 pv2 db black">
+            VBScript isNumeric 跟你想的不一樣
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-10-14-c-parallelfor-python-multiprocess/" class="link ph2 pv2 db black">
+            C# Parallel.For / Python multiprocess
+          </a>
+        </li>
+      
+        <li class="list f5 w-100 hover-bg-white nl1">
+          
+          <a href="/code-experiments/posts/2013-10-14-parallelfor-and-map/" class="link ph2 pv2 db black">
+            C# Select / Python map
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+    </aside>
+  </div>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://elleryq.github.io/code-experiments/" >
+    &copy; 2020 Code experiments
+  </a>
+  
+
+
+
+  <a href="https://twitter.com/elleryq" class="link-transition twitter link dib z-999 pt3 pt0-l mr2" title="Twitter link">
+    <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+  </a>
+
+
+
+
+
+
+  </div>
+</footer>
+
+    <script src="https://elleryq.github.io/code-experiments/dist/app.bundle.js" async></script>
+
+  </body>
+</html>

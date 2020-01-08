@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java on Code experiments</title>
+    <link>https://elleryq.github.io/code-experiments/categories/java/</link>
+    <description>Recent content in java on Code experiments</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Tue, 03 Feb 2015 03:24:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://elleryq.github.io/code-experiments/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java Short</title>
+      <link>https://elleryq.github.io/code-experiments/posts/2015-02-03-java-short/</link>
+      <pubDate>Tue, 03 Feb 2015 03:24:00 +0800</pubDate>
+      
+      <guid>https://elleryq.github.io/code-experiments/posts/2015-02-03-java-short/</guid>
+      <description>沒想到簡單的 i + 1
+class test_short { public void test() { Short i=1; i = i + 1; } }  在形態是 Short 的情況下是會編譯失敗的。
+得這樣改才行
+class test_short { public void test() { Short i=1; i = (short)(i+1); } }  </description>
+    </item>
+    
+  </channel>
+</rss>
